@@ -22,7 +22,21 @@ def get_order_data():
     print("Then press Enter when you are ready\n")
 
     data_str = input("Enter your order here:")
-    print(f"Thanks for ordering juice number {data_str}")
+    
+    order_data = data_str.split(",")
+    validate_data(order_data)
+
+def validate_data(value):
+    """
+    Converts all string values into integers.
+    Raises ValueError if strings cannot be converted into integers.
+    Or if there are more then 1 value. 
+    """
+    try: 
+        if len(value) != 1:
+            raise ValueError(f"Please enter a number between 1-5, you provided {len(value)}")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again\n")
 
 
 get_order_data()
