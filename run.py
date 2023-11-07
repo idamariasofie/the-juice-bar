@@ -12,32 +12,38 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('the_juice_bar')
 
+    def get_order_data():
+        """
+        Get order value input from the user 
+        """
+        while True:
+            print("Please enter your juice of choice (1-5)")
+            print("Then press Enter when you are ready.\n")
 
+        data_str = input("Enter your order here:\n")
+        order_data = data_str.split()
+        if validate_data(order_data):
+            print("Thanks for your order")
+            break
 
-def get_order_data():
-    """
-    Get order value input from the user 
-    """
-    print("Please enter your juice of choice (1-5)")
-    print("Then press Enter when you are ready.\n")
+    return order_data
 
-    data_str = input("Enter your order here:\n")
-    
-    order_data = data_str.split()
-    validate_data(order_data)
-
-def validate_data(value):
-    """
-    Converts all string values into integers.
-    Raises ValueError if strings cannot be converted into integers.
-    Or if there are more then 1 value. 
-    """
+    def validate_data(value):
+        """
+        Converts all string values into integers.
+        Raises ValueError if strings cannot be converted into integers.
+        Or if there are more then 1 value. 
+        """
     try: 
         [int(value) for value in value]
         if len(value) != 1:
-            raise ValueError(f"Please enter a number between 1 and 5, you provided {len(value)}")
+            raise ValueError(
+                f"Please enter a number between 1-5, you entered {len(value)}"
+            )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
+        return False
 
+    return True
 
-get_order_data()
+    data = get_order_data()
