@@ -19,11 +19,11 @@ def get_order_data():
     Get order value input from the user 
     """
     print("Please enter your juice of choice (1-5)")
-    print("Then press Enter when you are ready\n")
+    print("Then press Enter when you are ready.\n")
 
-    data_str = input("Enter your order here:")
+    data_str = input("Enter your order here:\n")
     
-    order_data = data_str.split(",")
+    order_data = data_str.split()
     validate_data(order_data)
 
 def validate_data(value):
@@ -33,8 +33,9 @@ def validate_data(value):
     Or if there are more then 1 value. 
     """
     try: 
+        [int(value) for value in value]
         if len(value) != 1:
-            raise ValueError(f"Please enter a number between 1-5, you provided {len(value)}")
+            raise ValueError(f"Please enter a number between 1 and 5, you provided {len(value)}")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
 
