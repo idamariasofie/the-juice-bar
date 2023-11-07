@@ -12,8 +12,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('the_juice_bar')
 
-menu = SHEET.worksheet('menu')
 
-data = menu.get_all_values()
 
-print(data)
+def get_order_data():
+    """
+    Get order value input from the user 
+    """
+    print("Please enter your juice of choice (1-5)")
+    print("Then press Enter when you are ready\n")
+
+    data_str = input("Enter your order here:")
+    print(f"Thanks for ordering juice number {data_str}")
+
+
+get_order_data()
