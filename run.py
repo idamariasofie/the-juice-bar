@@ -12,6 +12,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('the_juice_bar')
 
+
 def get_order_data():
     """
     Get juice order value input from the user
@@ -58,7 +59,7 @@ def validate_data(value):
         [int(value) for value in value]
         if len(value) != 1:
             raise ValueError(
-                f"Please enter a number between 1 and 5, you entered {len(value)}")
+                f"Please enter a number (1-5)\n you entered {len(value)}")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
         return False
@@ -78,6 +79,16 @@ def main():
     """
     Run all program functions
     """
+class JuiceOrder:
+    """
+    Creates an instance of JuiceOrder
+    """
+    def __init__(self, juice_type, size, price, quantity):
+        self.juice_type = juice_type
+        self.size = size
+        self.price = price
+        self.quantity = quantity
+
 data = get_order_data()
 order_data = [int(num) for num in data]
 update_order_worksheet(order_data)
