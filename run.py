@@ -51,7 +51,7 @@ def get_size_data():
 
         data_str = input("Enter your order here:\n")
         size_data = data_str.split(",")
-
+        
         if validate_data(size_data):
             print("Thanks for your order")
             break
@@ -74,6 +74,16 @@ def validate_data(value):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
         return False
+
+def validate_size_data():
+    """
+    Converts all string values into integers.
+    Raises ValueError if strings cannot be converted into integers.
+    Or if there aren't exactly 1 value.
+    """
+    try:
+        size = ['S', 'M', 'L']
+        
 
 def update_order_worksheet(data):
     """
